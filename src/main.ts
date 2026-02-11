@@ -12,6 +12,8 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
+
+  app.enableShutdownHooks();
   const config = new DocumentBuilder()
     .setTitle('Day One API')
     .setDescription('Nestjs API Learning Project')
