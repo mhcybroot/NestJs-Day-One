@@ -9,10 +9,10 @@ export class StudentService {
   private students: Student[] = [];
 
   create(createStudentDto: CreateStudentDto) {
-    let newStudent : Student = {
-      id : Date.now(),
-      ...createStudentDto
-    }
+    let newStudent: Student = {
+      id: Date.now(),
+      ...createStudentDto,
+    };
     this.students.push(newStudent);
     return newStudent;
   }
@@ -36,24 +36,24 @@ export class StudentService {
   patchStudent(id: number, age: number) {
     const index = this.students.findIndex((student) => student.id === id);
     if (index === -1) throw new NotFoundException('Student Not Found!');
-    let updateStudent : Student= {
-      id:id,
+    let updateStudent: Student = {
+      id: id,
       name: this.students[index].name,
-      age: age
-    }
+      age: age,
+    };
 
     this.students[index] = updateStudent;
     return this.students[index];
   }
 
-  patchName(id:number,name:string){
+  patchName(id: number, name: string) {
     const index = this.students.findIndex((student) => student.id === id);
     if (index === -1) throw new NotFoundException('Student Not Found!');
-    let updateStudent : Student= {
-      id:id,
+    let updateStudent: Student = {
+      id: id,
       name: name,
-      age: this.students[index].age
-    }
+      age: this.students[index].age,
+    };
     this.students[index] = updateStudent;
     return this.students[index];
   }

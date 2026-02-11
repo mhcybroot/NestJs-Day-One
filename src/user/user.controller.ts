@@ -4,7 +4,6 @@ import { Roles } from 'src/guards/roles/roles.decoretor';
 import { Role } from 'src/guards/roles/roles.enum';
 import { RolesGuard } from 'src/guards/roles/roles.guard';
 
-
 @Controller('user')
 export class UserController {
   @Get()
