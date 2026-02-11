@@ -2,18 +2,19 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 import { NotFoundError } from 'rxjs';
+import { Student } from './interface/student.interface';
 
 @Injectable()
 export class StudentService {
-  private students: CreateStudentDto[] = [
-    new CreateStudentDto(1, 'mahmudul hasan', 25),
-    new CreateStudentDto(2, 'kamrun hasan', 21),
-    new CreateStudentDto(3, 'naim hasan', 55),
-  ];
+  private students: Student[] = [];
 
   create(createStudentDto: CreateStudentDto) {
-    this.students.push(createStudentDto);
-    return createStudentDto;
+    let newStudent : Student = {
+      id : Date.now(),
+      ...createStudentDto
+    }
+    this.students.push(newStudent);
+    return newStudent;
   }
 
   findAll() {
@@ -35,11 +36,11 @@ export class StudentService {
   patchStudent(id: number, age: number) {
     const index = this.students.findIndex((student) => student.id === id);
     if (index === -1) throw new NotFoundException('Student Not Found!');
-    let updateStudent = new CreateStudentDto(
-      id,
-      this.students[index].name,
-      age,
-    );
+    let updateStudent : Student= {
+      id:id,
+      name: this.students[index].name,
+      age: age
+    }
 
     this.students[index] = updateStudent;
     return this.students[index];
