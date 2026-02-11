@@ -46,6 +46,17 @@ export class StudentService {
     return this.students[index];
   }
 
+  patchName(id:number,name:string){
+    const index = this.students.findIndex((student) => student.id === id);
+    if (index === -1) throw new NotFoundException('Student Not Found!');
+    let updateStudent : Student= {
+      id:id,
+      name: name,
+      age: this.students[index].age
+    }
+    this.students[index] = updateStudent;
+    return this.students[index];
+  }
   remove(id: number) {
     const index = this.students.findIndex((student) => student.id === id);
     if (index === -1) throw new NotFoundException('Student Not Found!');
